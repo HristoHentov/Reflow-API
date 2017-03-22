@@ -1,0 +1,7 @@
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\rfcore.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\rfcore.pdb
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\Newtonsoft.Json.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\Newtonsoft.Json.xml
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Debug\Reflow.Core.csprojResolveAssemblyReference.cache
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Debug\rfcore.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Debug\rfcore.pdb

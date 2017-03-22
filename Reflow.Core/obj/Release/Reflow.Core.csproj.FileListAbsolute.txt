@@ -1,0 +1,4 @@
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfcore.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Newtonsoft.Json.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Newtonsoft.Json.xml
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Release\rfcore.dll
