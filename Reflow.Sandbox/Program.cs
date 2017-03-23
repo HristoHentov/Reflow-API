@@ -1,4 +1,6 @@
-﻿using ReflowCore.Reflow;
+﻿using System;
+using System.IO;
+using ReflowCore.Reflow;
 
 namespace Reflow.Sandbox
 {
@@ -6,10 +8,11 @@ namespace Reflow.Sandbox
     {
         static void Main(string[] args)
         {
-            ReflowController app = new ReflowController();
-            app.AddTag("OH FUCK IT HAPPENED");
+            string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
-            //TODO: Install SQLite for Sandbox and Core
+            ReflowController app = new ReflowController();
+            app.AddTag("Test5");
         }
     }
 }
