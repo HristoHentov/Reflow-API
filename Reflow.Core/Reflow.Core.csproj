@@ -61,7 +61,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Reflow.Data\Reflow.Data.csproj">
+      <Project>{035bbc6d-00b0-4ac4-ab29-4849bd8388b0}</Project>
+      <Name>Reflow.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reflow.Models\Reflow.Models.csproj">
+      <Project>{197DE1F5-D529-4C46-A152-1B9E22D72AD5}</Project>
+      <Name>Reflow.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

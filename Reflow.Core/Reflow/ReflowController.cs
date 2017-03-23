@@ -1,4 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Reflow.Data;
+using Reflow.Data.Contracts;
+using ReflowModels;
 
 namespace ReflowCore.Reflow
 {
@@ -77,6 +80,13 @@ namespace ReflowCore.Reflow
         public async Task<object> Rename(string directoryPath, string fileList)
         {
             return null;
+        }
+
+        public void AddTag(string name)
+        {
+            IUnitOfWork database = new UnitOfWork();
+            database.Tags.Add(new Tag() {Name = name});
+            database.SaveChanges();
         }
     }
 }

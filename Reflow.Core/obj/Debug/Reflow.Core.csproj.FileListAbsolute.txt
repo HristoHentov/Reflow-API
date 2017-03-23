@@ -5,3 +5,9 @@ E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\Newtons
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Debug\Reflow.Core.csprojResolveAssemblyReference.cache
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Debug\rfcore.dll
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Debug\rfcore.pdb
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\Reflow.Data.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\EntityFramework.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\Reflow.Data.pdb
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\EntityFramework.xml
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\rfmodel.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\rfmodel.pdb

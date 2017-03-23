@@ -1,12 +1,20 @@
-﻿namespace ReflowModels
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ReflowModels
 {
     public class File
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Type { get; set; }
+        [Required]
         public string OldName { get; set; }
+        [Required]
         public string NewName { get; set; }
-        public float Size { get; set; }
+        [Required]
+        public string Path { get; set; }
+        [Column(TypeName = "real")]
+        public double? Size { get; set; }
         public string SizeScale { get; set; }
     }
 }
