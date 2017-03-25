@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Reflow.Data;
 using Reflow.Data.Contracts;
+using ReflowCore.Controllers;
 using ReflowModels;
 
 namespace ReflowCore.Reflow
@@ -11,13 +14,40 @@ namespace ReflowCore.Reflow
     /// </summary>
     public class ReflowController
     {
+
+        private ICollection<IReflowController> components;
+        private readonly RenamingController renamingController;
+
+        public ReflowController()
+            : this(new DirectoryStructureController(), new RenamingController())
+        {
+        }
+        internal ReflowController(params IReflowController[] reflowControllers)
+        {
+            Load(reflowControllers);
+            foreach (var component in components)
+            {
+                component.Initialize();
+            }
+            renamingController = (RenamingController)this.components.FirstOrDefault(c => c.GetType() == typeof(RenamingController));
+        }
+        private void Load(params IReflowController[] reflowControllers)
+        {
+            this.components = new HashSet<IReflowController>();
+            foreach (var component in reflowControllers)
+            {
+                this.components.Add(component);
+            }
+        }
+
+
         /// <summary>
         /// Returns all tags that the app contains.
         /// </summary>
         /// <returns>JSON: Name, Options - OptionType, OptionName.</returns>
         public async Task<object> GetTags()
         {
-            return null;
+            return renamingController.GetTags();
         }
         /// <summary>
         /// Returns all filters for selecting files.        
@@ -25,7 +55,7 @@ namespace ReflowCore.Reflow
         /// <returns>JSON: FilterName, FilterOptions </returns>
         public async Task<object> GetFilters()
         {
-            return null;
+            return renamingController.GetFilters();
         }
         /// <summary>
         /// Gets all files in a given directory (Excluding folders)
@@ -34,7 +64,7 @@ namespace ReflowCore.Reflow
         /// <returns>JSON: CustomFile (Check ReflowFile class to see fields)</returns>
         public async Task<object> GetFilesInDirectory(object directoryPath)
         {
-            return null;
+            return renamingController.GetFiles(directoryPath.ToString());
         }
         /// <summary>
         /// Updates filenames (UI only), based on an object[] containing the options that the attributes use.
