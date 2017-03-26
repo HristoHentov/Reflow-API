@@ -11,7 +11,7 @@ namespace ReflowCore.Services
 {
     internal class RenamingService
     {
-        private IUnitOfWork database;
+        private readonly IUnitOfWork database;
 
         public RenamingService()
         {
@@ -33,6 +33,11 @@ namespace ReflowCore.Services
             }
 
             return files;
+        }
+
+        internal IEnumerable<Tag> GetTags()
+        {
+            return database.Tags.Entities;
         }
 
         private string GetFileSize(string filePath)
@@ -59,11 +64,6 @@ namespace ReflowCore.Services
                 return $"{size / oneTb:f2} TB";
 
             return "1+ PB";
-        }
-
-        public IEnumerable<Tag> GetTags()
-        {
-            return database.Tags.Entities;
         }
     }
 }

@@ -11,3 +11,16 @@ E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\Reflow.
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\EntityFramework.xml
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\rfmodel.dll
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Debug\rfmodel.pdb
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\rfcore.dll
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\rfcore.pdb
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\rfdata.dll
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\rfmodel.dll
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\EntityFramework.dll
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\rfdata.pdb
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\rfmodel.pdb
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Debug\EntityFramework.xml
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Debug\Reflow.Core.csprojResolveAssemblyReference.cache
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Debug\rfcore.dll
+C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Debug\rfcore.pdb

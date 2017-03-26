@@ -12,13 +12,12 @@ namespace Reflow.Sandbox
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
             ReflowController app = new ReflowController();
-            Console.WriteLine(app.GetFilesInDirectory("E:\\Downloads\\Network").Result);
-
-            Console.WriteLine("ADDING TAG ======");
-            app.AddTag("TestAfk");
+            Console.WriteLine(app.GetFilesInDirectory("D:\\CG Stuff\\Graphics\\Projects - Personal\\CV").Result);     
 
             Console.WriteLine("RETURNING TAGS");
             Console.WriteLine(app.GetTags().Result);
+
+            var x = Console.ReadLine();
         }
     }
 }
