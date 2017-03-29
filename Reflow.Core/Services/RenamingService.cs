@@ -40,6 +40,11 @@ namespace ReflowCore.Services
             return database.Tags.Entities;
         }
 
+        public IEnumerable<Filter> GetFilters()
+        {
+            return database.Filters.Entities;
+        }
+
         private string GetFileSize(string filePath)
         {
             long chunk = 1024L;

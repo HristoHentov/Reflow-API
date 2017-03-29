@@ -2,9 +2,7 @@ E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfcor
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Newtonsoft.Json.dll
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Newtonsoft.Json.xml
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Release\rfcore.dll
-E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Reflow.Data.dll
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\EntityFramework.dll
-E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Reflow.Data.pdb
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\EntityFramework.xml
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Release\Reflow.Core.csprojResolveAssemblyReference.cache
 C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Release\rfcore.dll
@@ -16,3 +14,5 @@ C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Release\Newtonsoft.Json.xml
 C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\bin\Release\EntityFramework.xml
 C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Release\Reflow.Core.csprojResolveAssemblyReference.cache
 C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Release\rfcore.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfdata.dll
+E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfmodel.dll

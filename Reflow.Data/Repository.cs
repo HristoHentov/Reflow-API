@@ -9,17 +9,14 @@ namespace Reflow.Data
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private DbSet<T> set;
+        private readonly DbSet<T> set;
 
         public Repository(DbSet<T> set)
         {
             this.set = set;
         }
 
-        public IEnumerable<T> Entities
-        {
-            get { return this.set; }
-        }
+        public IEnumerable<T> Entities => this.set;
 
         public void Add(T entity)
         {

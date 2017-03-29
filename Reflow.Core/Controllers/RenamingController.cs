@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using ReflowCore.Exchange;
 using ReflowCore.Services;
@@ -36,7 +37,8 @@ namespace ReflowCore.Controllers
 
         public string GetFilters()
         {
-            throw new System.NotImplementedException();
+            var filters = service.GetFilters().ToList();
+            return exporter.Export(filters);
         }
 
         public string GetFiles(string directoryPath)

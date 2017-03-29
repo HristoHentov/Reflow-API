@@ -11,11 +11,10 @@ namespace Reflow.Data
         {
         }
 
-        //TODO: Change absolute to relative path for the connection string.
-        //TODO: Add the additional <provider> tag to the app.config if necessary.
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Option> Options { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Filter> Filters { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

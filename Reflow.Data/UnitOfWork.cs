@@ -1,4 +1,5 @@
-﻿using Reflow.Data.Contracts;
+﻿using System.Runtime.CompilerServices;
+using Reflow.Data.Contracts;
 using ReflowModels;
 
 namespace Reflow.Data
@@ -9,6 +10,7 @@ namespace Reflow.Data
         private IRepository<Tag> tags;
         private IRepository<Option> options;
         private IRepository<File> files;
+        private IRepository<Filter> filters;
 
         public UnitOfWork()
         {
@@ -21,6 +23,8 @@ namespace Reflow.Data
             => this.tags ?? (this.tags = new Repository<Tag>(this.context.Tags));
         public IRepository<File> Files
             => this.files ?? (this.files = new Repository<File>(this.context.Files));
+        public IRepository<Filter> Filters
+            => this.filters ?? (this.filters = new Repository<Filter>(this.context.Filters));
 
         public int SaveChanges()
         {

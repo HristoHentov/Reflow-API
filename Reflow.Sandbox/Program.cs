@@ -12,12 +12,7 @@ namespace Reflow.Sandbox
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
             ReflowController app = new ReflowController();
-            Console.WriteLine(app.GetFilesInDirectory("D:\\CG Stuff\\Graphics\\Projects - Personal\\CV").Result);     
-
-            Console.WriteLine("RETURNING TAGS");
-            Console.WriteLine(app.GetTags().Result);
-
-            var x = Console.ReadLine();
+            Console.WriteLine(app.GetFilters().Result);
         }
     }
 }

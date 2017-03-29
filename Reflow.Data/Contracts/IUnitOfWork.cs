@@ -10,6 +10,8 @@ namespace Reflow.Data.Contracts
 
         IRepository<File> Files { get; }
 
+        IRepository<Filter> Filters { get; }
+
         int SaveChanges();
     }
 }
