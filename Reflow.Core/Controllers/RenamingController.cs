@@ -44,7 +44,13 @@ namespace ReflowCore.Controllers
         public string GetFiles(string directoryPath)
         {
             var files = service.GetFileNamesByDir(directoryPath);
+            service.FillCache(files);
             return exporter.Export(files);
+        }
+
+        public string GetFileCount()
+        {
+            return exporter.Export(service.GetFileCount());
         }
     }
 }

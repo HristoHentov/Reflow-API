@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Threading.Tasks;
 using Reflow.Data;
 using Reflow.Data.Contracts;
@@ -31,15 +32,6 @@ namespace ReflowCore.Reflow
             }
             renamingController = (RenamingController)this.components.FirstOrDefault(c => c.GetType() == typeof(RenamingController));
         }
-        private void Load(params IReflowController[] reflowControllers)
-        {
-            this.components = new HashSet<IReflowController>();
-            foreach (var component in reflowControllers)
-            {
-                this.components.Add(component);
-            }
-        }
-
 
         /// <summary>
         /// Returns all tags that the app contains.
@@ -65,6 +57,15 @@ namespace ReflowCore.Reflow
         public async Task<object> GetFilesInDirectory(object directoryPath)
         {
             return renamingController.GetFiles(directoryPath.ToString());
+        }
+        /// <summary>
+        /// Returns all currently loaded files.
+        /// </summary>
+        /// <param name="optional"></param>
+        /// <returns></returns>
+        public async Task<object> GetFilesCount(object optional)
+        {
+            return renamingController.GetFileCount();
         }
         /// <summary>
         /// Updates filenames (UI only), based on an object[] containing the options that the attributes use.
@@ -118,6 +119,16 @@ namespace ReflowCore.Reflow
             database.Tags.Add(new Tag() {Name = name});
             database.SaveChanges();
         }
+
+        private void Load(params IReflowController[] reflowControllers)
+        {
+            this.components = new HashSet<IReflowController>();
+            foreach (var component in reflowControllers)
+            {
+                this.components.Add(component);
+            }
+        }
+
     }
 }
 #pragma warning restore 1998

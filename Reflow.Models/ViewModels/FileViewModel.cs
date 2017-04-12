@@ -2,7 +2,9 @@
 {
     public class FileViewModel
     {
-        public string Name { get; set; }
+        public string OriginalName { get; set; }
+
+        public string NewName { get; set; }
 
         public string Type { get; set; }
 

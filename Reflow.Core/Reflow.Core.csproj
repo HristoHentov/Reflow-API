@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\FilesCache.cs" />
     <Compile Include="Constants\Consts.cs" />
     <Compile Include="Controllers\DirectoryStructureController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />

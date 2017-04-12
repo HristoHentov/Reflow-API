@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using Reflow.Data;
 using Reflow.Data.Contracts;
+using ReflowCore.Cache;
 using ReflowCore.Utility;
 using ReflowModels;
 using ReflowModels.ViewModels;
+using File = ReflowModels.File;
 
 namespace ReflowCore.Services
 {
@@ -26,7 +28,8 @@ namespace ReflowCore.Services
                 var fileName = Utils.GetFullFilename(file);
                 files.Add(fileName[0] + "." + fileName[1], new FileViewModel()
                 {
-                    Name = fileName[0],
+                    OriginalName = fileName[0],
+                    NewName = fileName[0],
                     Type = fileName[1],
                     Size = GetFileSize(file)
                 });
@@ -69,6 +72,16 @@ namespace ReflowCore.Services
                 return $"{size / oneTb:f2} TB";
 
             return "1+ PB";
+        }
+
+        public void FillCache(IDictionary<string, FileViewModel> files)
+        {
+            FilesCache.Files = new Dictionary<string, FileViewModel>(files);
+        }
+
+        public int GetFileCount()
+        {
+            return FilesCache.Files.Count;
         }
     }
 }
