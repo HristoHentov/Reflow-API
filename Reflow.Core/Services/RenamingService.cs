@@ -4,20 +4,24 @@ using System.IO;
 using Reflow.Data;
 using Reflow.Data.Contracts;
 using ReflowCore.Cache;
+using ReflowCore.Exchange;
 using ReflowCore.Utility;
-using ReflowModels;
+using ReflowModels.EntityModels;
+using ReflowModels.Naming;
+using ReflowModels.NamingModels.Tags;
 using ReflowModels.ViewModels;
-using File = ReflowModels.File;
 
 namespace ReflowCore.Services
 {
     internal class RenamingService
     {
         private readonly IUnitOfWork database;
+        private readonly IImporter importer;
 
         public RenamingService()
         {
             this.database = new UnitOfWork();
+            this.importer = new JsonImporter();
         }
         internal IDictionary<string, FileViewModel> GetFileNamesByDir(string path)
         {
@@ -31,14 +35,15 @@ namespace ReflowCore.Services
                     OriginalName = fileName[0],
                     NewName = fileName[0],
                     Type = fileName[1],
-                    Size = GetFileSize(file)
+                    Size = GetFileSize(file),
+                    Filtered = false
                 });
             }
 
             return files;
         }
 
-        internal IEnumerable<Tag> GetTags()
+        internal IEnumerable<TagEntityModel> GetTags()
         {
             return database.Tags.Entities;
         }
@@ -82,6 +87,18 @@ namespace ReflowCore.Services
         public int GetFileCount()
         {
             return FilesCache.Files.Count;
+        }
+
+        public string UpdateFiles(string attributesJson)
+        {
+            NameBuilder nameBuilder = new NameBuilder();
+            nameBuilder.Tags = this.GetNameBuilderTags(attributesJson);
+            return nameBuilder.Resolve(FilesCache.Files);
+        }
+
+        private ICollection<ITag> GetNameBuilderTags(string json)
+        {
+            return (ITag[])importer.ParseJson(json);
         }
     }
 }

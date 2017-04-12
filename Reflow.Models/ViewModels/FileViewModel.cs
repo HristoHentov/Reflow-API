@@ -9,5 +9,7 @@
         public string Type { get; set; }
 
         public string Size { get; set; }
+
+        public bool Filtered { get; set; }
     }
 }

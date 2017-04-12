@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using ReflowCore.Exchange;
 using ReflowCore.Services;
-using ReflowModels;
+using ReflowModels.EntityModels;
 
 namespace ReflowCore.Controllers
 {
@@ -31,7 +30,7 @@ namespace ReflowCore.Controllers
 
         public string GetTags()
         {
-            IEnumerable<Tag> reflowTags = service.GetTags();
+            IEnumerable<TagEntityModel> reflowTags = service.GetTags();
             return exporter.Export(reflowTags);
         }
 
@@ -51,6 +50,11 @@ namespace ReflowCore.Controllers
         public string GetFileCount()
         {
             return exporter.Export(service.GetFileCount());
+        }
+
+        public string UpdateFiles(string attributesJson)
+        {
+            return exporter.Export(service.UpdateFiles(attributesJson));
         }
     }
 }

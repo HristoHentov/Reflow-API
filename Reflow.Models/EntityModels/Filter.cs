@@ -1,4 +1,4 @@
-﻿namespace ReflowModels
+﻿namespace ReflowModels.EntityModels
 {
     public class Filter
     {

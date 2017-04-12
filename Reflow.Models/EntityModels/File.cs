@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ReflowModels
+namespace ReflowModels.EntityModels
 {
     public class File
     {

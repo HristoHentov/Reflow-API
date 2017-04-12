@@ -1,4 +1,4 @@
-﻿using ReflowModels;
+﻿using ReflowModels.EntityModels;
 
 namespace Reflow.Data.Contracts
 {
@@ -6,7 +6,7 @@ namespace Reflow.Data.Contracts
     {
         IRepository<Option> Options { get; }
 
-        IRepository<Tag> Tags { get; }
+        IRepository<TagEntityModel> Tags { get; }
 
         IRepository<File> Files { get; }
 

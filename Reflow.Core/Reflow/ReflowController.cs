@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting;
 using System.Threading.Tasks;
 using Reflow.Data;
 using Reflow.Data.Contracts;
 using ReflowCore.Controllers;
-using ReflowModels;
+using ReflowModels.EntityModels;
 
 namespace ReflowCore.Reflow
 {
@@ -68,13 +67,13 @@ namespace ReflowCore.Reflow
             return renamingController.GetFileCount();
         }
         /// <summary>
-        /// Updates filenames (UI only), based on an object[] containing the options that the attributes use.
+        /// Updates filenames (UI only), based on a JSON containing the attributes and their options.
         /// </summary>
-        /// <param name="tagAttributes">An array of KVP, containg the name of the attribute and its parameters</param>
+        /// <param name="attributesJson">An array of KVP, containg the name of the attribute and its parameters</param>
         /// <returns>JSON: Old Filename, NewFilename</returns>
-        public async Task<object> UpdateFileNames(params object[] tagAttributes)
+        public async Task<object> UpdateFiles(string attributesJson)
         {
-            return null;
+            return renamingController.UpdateFiles(attributesJson);
         }
         /// <summary>
         /// Updates filenames (UI only), based on an JSON, containing the options that the attributes use.
@@ -116,7 +115,7 @@ namespace ReflowCore.Reflow
         public void AddTag(string name)
         {
             IUnitOfWork database = new UnitOfWork();
-            database.Tags.Add(new Tag() {Name = name});
+            database.Tags.Add(new TagEntityModel() {Name = name});
             database.SaveChanges();
         }
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ReflowModels;
 using ReflowModels.ViewModels;
 
 namespace ReflowCore.Cache

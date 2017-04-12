@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ReflowModels
+namespace ReflowModels.EntityModels
 {
     public class Option
     {
@@ -10,6 +10,6 @@ namespace ReflowModels
         [Required]
         public string Type { get; set; }
         public long? TagId { get; set; }
-        public virtual Tag Tag { get; set; }
+        public virtual TagEntityModel TagEntityModel { get; set; }
     }
 }
