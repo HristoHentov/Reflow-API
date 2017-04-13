@@ -89,7 +89,7 @@ namespace ReflowCore.Services
             return FilesCache.Files.Count;
         }
 
-        public string UpdateFiles(string attributesJson)
+        public IDictionary<string, string> UpdateFiles(string attributesJson)
         {
             NameBuilder nameBuilder = new NameBuilder();
             nameBuilder.Tags = this.GetNameBuilderTags(attributesJson);
@@ -98,7 +98,9 @@ namespace ReflowCore.Services
 
         private ICollection<ITag> GetNameBuilderTags(string json)
         {
-            return (ITag[])importer.ParseJson(json);
+            var cs = new List<ITag>();
+            cs.Add(importer.Import(json));
+            return cs;
         }
     }
 }

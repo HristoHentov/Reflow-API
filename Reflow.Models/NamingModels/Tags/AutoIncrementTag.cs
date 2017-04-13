@@ -11,6 +11,15 @@ namespace ReflowModels.NamingModels.Tags
         {
             lastValue = StartFrom - Skip; // Adding skip later in the beginning of ToString()
         }
+
+        public AutoIncrementTag(int startFrom, int skip, bool trailingZero)
+        {
+            this.StartFrom = startFrom;
+            this.Skip = skip;
+            this.TrailingZero = trailingZero;
+            lastValue = StartFrom - Skip; // Adding skip later in the beginning of ToString()
+
+        }
         public int StartFrom { get; set; }
 
         public int Skip { get; set; }
@@ -23,11 +32,14 @@ namespace ReflowModels.NamingModels.Tags
             lastValue += Skip;
             if (TrailingZero)
                 return lastValue.ToString().PadLeft(GetTrailingZeroes(files), '0');
+
             return lastValue.ToString();
         }
 
         private int GetTrailingZeroes(IDictionary<string, FileViewModel> files)
         {
+            if (files == null)
+                return 0;
             var count = files.Values.Count(f => !f.Filtered);
             var result = Math.Max(StartFrom, count * (Skip - 1) + StartFrom); // Not a good formula, but will do for now.
             return result.ToString().Length;

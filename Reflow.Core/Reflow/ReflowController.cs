@@ -71,7 +71,7 @@ namespace ReflowCore.Reflow
         /// </summary>
         /// <param name="attributesJson">An array of KVP, containg the name of the attribute and its parameters</param>
         /// <returns>JSON: Old Filename, NewFilename</returns>
-        public async Task<object> UpdateFiles(string attributesJson)
+        public string UpdateFiles(string attributesJson)
         {
             return renamingController.UpdateFiles(attributesJson);
         }
