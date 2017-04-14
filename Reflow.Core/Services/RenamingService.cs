@@ -102,5 +102,30 @@ namespace ReflowCore.Services
             cs.Add(importer.Import(json));
             return cs;
         }
+
+        public string RenameFiles()
+        {
+            foreach (var file in FilesCache.Files)
+            {
+                RenameFile(file.Value.OriginalName, file.Value.NewName, file.Value.Type);
+            }
+
+            return "Success";
+        }
+
+        private bool RenameFile(string oldName, string newName, string fileType)
+        {
+            try
+            {
+                System.IO.File.Move
+                           (Path.Combine(FilesCache.WorkingDirectory, oldName, fileType),
+                            Path.Combine(FilesCache.WorkingDirectory, newName, fileType));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

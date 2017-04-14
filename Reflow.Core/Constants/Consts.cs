@@ -2,6 +2,6 @@
 {
     internal static class Consts
     {
-        
+        internal static string ModelsAssemblyName = "rfmodel";
     }
 }

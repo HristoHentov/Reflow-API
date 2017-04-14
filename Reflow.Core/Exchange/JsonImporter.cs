@@ -2,6 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ReflowCore.Constants;
 using ReflowModels.NamingModels.Tags;
 
 namespace ReflowCore.Exchange
@@ -16,7 +17,7 @@ namespace ReflowCore.Exchange
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var assembly = assemblies
-                .First(a => a.FullName.Split(',')[0] == "rfmodel");
+                .First(a => a.FullName.Split(',')[0] == Consts.ModelsAssemblyName);
 
             Type neededTagType = 
                 assembly

@@ -56,5 +56,11 @@ namespace ReflowCore.Controllers
         {
             return exporter.Export(service.UpdateFiles(attributesJson));
         }
+
+        public string RenameFiles()
+        {
+            return exporter.Export(service.RenameFiles());
+        }
+
     }
 }

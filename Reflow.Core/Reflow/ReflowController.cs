@@ -48,6 +48,7 @@ namespace ReflowCore.Reflow
         {
             return renamingController.GetFilters();
         }
+
         /// <summary>
         /// Gets all files in a given directory (Excluding folders)
         /// </summary>
@@ -98,20 +99,11 @@ namespace ReflowCore.Reflow
         /// This overload is for when all user options are saved into variables on the backend.
         /// </summary>
         /// <returns>Return success or error</returns>
-        public async Task<object> Rename()
+        public async Task<object> RenameFiles()
         {
-            return null;
+            return renamingController.RenameFiles();
         }
-        /// <summary>
-        /// Performes the actual on-disk renaming of files, taking into account all user preferences.
-        /// This overload is gets all user options from the frontend.
-        /// </summary>
-        /// <returns>Return success or error</returns>
-        public async Task<object> Rename(string directoryPath, string fileList)
-        {
-            return null;
-        }
-
+       
         public void AddTag(string name)
         {
             IUnitOfWork database = new UnitOfWork();
