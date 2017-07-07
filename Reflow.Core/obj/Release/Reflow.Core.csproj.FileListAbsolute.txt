@@ -16,3 +16,12 @@ C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Release\Reflow.Core.csprojResol
 C:\Users\Hentov\Desktop\Reflow B\Reflow.Core\obj\Release\rfcore.dll
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfdata.dll
 E:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfmodel.dll
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfcore.dll
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Newtonsoft.Json.dll
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfdata.dll
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\rfmodel.dll
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\EntityFramework.dll
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\Newtonsoft.Json.xml
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\bin\Release\EntityFramework.xml
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Release\Reflow.Core.csprojResolveAssemblyReference.cache
+D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core\obj\Release\rfcore.dll

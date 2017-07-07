@@ -3,6 +3,7 @@ using System.Linq;
 using ReflowCore.Exchange;
 using ReflowCore.Services;
 using ReflowModels.EntityModels;
+using System;
 
 namespace ReflowCore.Controllers
 {
@@ -42,9 +43,17 @@ namespace ReflowCore.Controllers
 
         public string GetFiles(string directoryPath)
         {
-            var files = service.GetFileNamesByDir(directoryPath);
-            service.FillCache(files);
-            return exporter.Export(files);
+            try
+            {
+                var files = service.GetFileNamesByDir(directoryPath);
+                service.FillCache(files);
+                return exporter.Export(files.Values);
+            }
+            catch(Exception e)
+            {
+                return e.Message + "\n" + e.StackTrace;
+            }
+            
         }
 
         public string GetFileCount()

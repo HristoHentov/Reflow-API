@@ -11,9 +11,12 @@ namespace ReflowCore.Exchange
     {
         ///TODO: After testing for performance, split into different methods. 
         ///TODO: This one should only handle the JObject.Parse and be called parse type or something
+        /// 
         public ITag Import(string json)
         {
             var tagType = JObject.Parse(json).First.First.ToString();
+
+            var x = JsonConvert.DeserializeObject<AutoIncrementTag>(json);
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var assembly = assemblies

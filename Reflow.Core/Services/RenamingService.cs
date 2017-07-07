@@ -27,11 +27,15 @@ namespace ReflowCore.Services
         {
             var inFiles = Directory.EnumerateFiles(path);
             var files = new Dictionary<string, FileViewModel>();
+
+            var index = 0;
             foreach (var file in inFiles)
             {
                 var fileName = Utils.GetFullFilename(file);
+                //var fileName = new[] { file, path };
                 files.Add(fileName[0] + "." + fileName[1], new FileViewModel()
                 {
+                    Key = index++,
                     OriginalName = fileName[0],
                     NewName = fileName[0],
                     Type = fileName[1],

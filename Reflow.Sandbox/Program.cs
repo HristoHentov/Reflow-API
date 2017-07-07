@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using ReflowCore.Reflow;
+using System.Threading.Tasks;
 
 namespace Reflow.Sandbox
 {
@@ -11,8 +12,14 @@ namespace Reflow.Sandbox
             string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
+
+            Console.WriteLine(path);
             ReflowController app = new ReflowController();
-            app.UpdateFiles(
+
+            Console.WriteLine("FZ");
+            Console.WriteLine(app.GetFilesInDirectory(@"D:\CG Stuff\Programming\Projects - Personal\Reflow\Reflow.Core").Result);
+         //   Console.WriteLine(app.GetDir(null).Result);
+           app.UpdateFiles(
                 "{\r\n  \"Type\": \"AutoIncrementTag\",\r\n  \"StartFrom\": 11,\r\n  \"Skip\": 25,\r\n  \"LeadingZero\": true\r\n}");
             Console.WriteLine(app.GetFilters().Result);
         }

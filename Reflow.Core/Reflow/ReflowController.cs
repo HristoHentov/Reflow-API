@@ -5,6 +5,8 @@ using Reflow.Data;
 using Reflow.Data.Contracts;
 using ReflowCore.Controllers;
 using ReflowModels.EntityModels;
+using System;
+using System.IO;
 
 namespace ReflowCore.Reflow
 {
@@ -58,6 +60,10 @@ namespace ReflowCore.Reflow
         {
             return renamingController.GetFiles(directoryPath.ToString());
         }
+        public async Task<object> GetDir(object stuff)
+        {
+            return AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+        }
         /// <summary>
         /// Returns all currently loaded files.
         /// </summary>
@@ -69,7 +75,7 @@ namespace ReflowCore.Reflow
         }
         /// <summary>
         /// Updates filenames (UI only), based on a JSON containing the attributes and their options.
-        /// </summary>
+        /// </summary
         /// <param name="attributesJson">An array of KVP, containg the name of the attribute and its parameters</param>
         /// <returns>JSON: Old Filename, NewFilename</returns>
         public string UpdateFiles(string attributesJson)
