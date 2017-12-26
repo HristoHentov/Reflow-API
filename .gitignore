@@ -265,3 +265,11 @@ Reflow.Data/obj
 
 Reflow.Models/bin
 Reflow.Models/obj
+/Reflow.Core/obj/
+/Reflow.Core/bin/
+/Reflow.Data/obj/
+/Reflow.Data/bin/
+/Reflow.Models/obj/
+/Reflow.Models/bin/
+/Reflow.Sandbox/obj/
+/Reflow.Sandbox/bin/
