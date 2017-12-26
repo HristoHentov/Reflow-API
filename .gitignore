@@ -254,14 +254,14 @@ paket-files/
 *.sln.iml
 
 #Bin directories
-Reflow.Sandbox\bin
-Reflow.Sandbox\obj
+Reflow.Sandbox/bin
+Reflow.Sandbox/obj
 
-Reflow.Core\bin
-Reflow.Core\obj
+Reflow.Core/bin
+Reflow.Core/obj
 
-Reflow.Data\bin
-Reflow.Data\obj
+Reflow.Data/bin
+Reflow.Data/obj
 
-Reflow.Models\bin
-Reflow.Models\obj
+Reflow.Models/bin
+Reflow.Models/obj
