@@ -1,7 +1,8 @@
 ﻿namespace ReflowModels.ViewModels
 {
     public class FileViewModel
-    {   public int Key { get; set; }     
+    {
+        public int Key { get; set; }
         public string OriginalName { get; set; }
 
         public string NewName { get; set; }
