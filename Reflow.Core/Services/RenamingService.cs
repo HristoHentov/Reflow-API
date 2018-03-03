@@ -43,7 +43,7 @@ namespace ReflowCore.Services
                         Key = index++,
                         OriginalName = fileName[0],
                         NewName = fileName[0],
-                        Type = fileName[1],
+                        Type = fileName[1] ?? "NONE",
                         Size = GetFileSize(file),
                         Filtered = false
                     });

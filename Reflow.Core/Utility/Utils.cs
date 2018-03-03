@@ -12,6 +12,11 @@
             string[] attribs = new string[2];
 
             attribs[0] = path.Substring(path.LastIndexOf('\\') + 1);
+            var extensionStart = attribs[0].LastIndexOf('.');
+
+            if (extensionStart == -1) // Cases where the file does not have an extension
+                return attribs;
+
             attribs[1] = attribs[0].Substring(attribs[0].LastIndexOf('.'));
 
             attribs[0] = attribs[0].Replace(attribs[1], string.Empty);
