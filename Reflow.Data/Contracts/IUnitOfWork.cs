@@ -6,7 +6,7 @@ namespace Reflow.Data.Contracts
     {
         IRepository<Option> Options { get; }
 
-        IRepository<TagEntityModel> Tags { get; }
+        IRepository<Tag> Tags { get; }
 
         IRepository<File> Files { get; }
 

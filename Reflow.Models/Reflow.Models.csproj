@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoIncrementTagEntityModel.cs" />
     <Compile Include="EntityModels\File.cs" />
     <Compile Include="EntityModels\Filter.cs" />
     <Compile Include="NamingModels\NameBuilder.cs" />
@@ -50,7 +49,7 @@
     <Compile Include="NamingModels\Tags\ITag.cs" />
     <Compile Include="NamingModels\Tags\StringTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EntityModels\TagEntityModel.cs" />
+    <Compile Include="EntityModels\Tag.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

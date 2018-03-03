@@ -10,6 +10,6 @@ namespace ReflowModels.EntityModels
         [Required]
         public string Type { get; set; }
         public long? TagId { get; set; }
-        public virtual TagEntityModel TagEntityModel { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

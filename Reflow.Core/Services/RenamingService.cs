@@ -58,7 +58,7 @@ namespace ReflowCore.Services
             }
         }
 
-        internal IEnumerable<TagEntityModel> GetTags()
+        internal IEnumerable<Tag> GetTags()
         {
             return _database.Tags.Entities;
         }
@@ -106,15 +106,20 @@ namespace ReflowCore.Services
 
         public IDictionary<string, string> UpdateFiles(string attributesJson)
         {
-            NameBuilder nameBuilder = new NameBuilder();
-            nameBuilder.Tags = this.GetNameBuilderTags(attributesJson);
-            return nameBuilder.Resolve(FilesCache.Files);
+            Log.Info("Started resolving tags.");
+            NameBuilder nameBuilder = new NameBuilder
+            {
+                Tags = this.GetNameBuilderTags(attributesJson)
+            };
+
+            var res = nameBuilder.Resolve(FilesCache.Files);
+            Log.Info("Resolving tags finished successfully.");
+            return res;
         }
 
         private ICollection<ITag> GetNameBuilderTags(string json)
         {
-            var cs = new List<ITag>();
-            cs.Add(_importer.Import(json));
+            var cs = new List<ITag> {_importer.Import(json)};
             return cs;
         }
 
@@ -136,8 +141,9 @@ namespace ReflowCore.Services
                            (Path.Combine(FilesCache.WorkingDirectory, oldName, fileType),
                             Path.Combine(FilesCache.WorkingDirectory, newName, fileType));
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Error($"Failed renaming file {oldName} to {newName}. FileType {fileType}. Exception Message: {e.Message}");
                 return false;
             }
             return true;

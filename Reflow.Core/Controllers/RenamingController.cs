@@ -40,7 +40,7 @@ namespace ReflowCore.Controllers
 
         public string GetTags()
         {
-            IEnumerable<TagEntityModel> reflowTags = _service.GetTags();
+            IEnumerable<Tag> reflowTags = _service.GetTags();
             return _exporter.Export(reflowTags);
         }
 

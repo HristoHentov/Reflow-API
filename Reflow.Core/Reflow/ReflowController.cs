@@ -121,7 +121,7 @@ namespace ReflowCore.Reflow
         public void AddTag(string name)
         {
             IUnitOfWork database = new UnitOfWork();
-            database.Tags.Add(new TagEntityModel() {Name = name});
+            database.Tags.Add(new Tag() {Name = name});
             database.SaveChanges();
         }
 
