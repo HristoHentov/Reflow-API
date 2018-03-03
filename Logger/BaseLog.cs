@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Logger
                 var taggedMessage = this.StampMessage(message, DateTime.Now, logLevel); //TODO: reencode time and level text to match message encoding.
                 byte[] payload = _encoding.GetBytes(taggedMessage);
 
-                await OutputStream.WriteAsync(payload, _streamOffset, payload.Length);
+                await OutputStream.WriteAsync(payload, 0, payload.Length);
 
                 _streamOffset += payload.Length;
             }
@@ -48,7 +49,7 @@ namespace Logger
 
         private string StampMessage(string message, DateTime time, Level level)
         {
-            return $"[{time.ToString(_timeFormat)}][{level}] {message}{Environment.NewLine}";
+            return $"[{time.ToString(_timeFormat)}] [{level}] - {message}{Environment.NewLine}";
         }
     }
 }

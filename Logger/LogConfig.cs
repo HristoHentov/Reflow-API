@@ -7,7 +7,7 @@ namespace Logger
     {
         private readonly Level _defaultLevel = Level.Verbose;
         private readonly Encoding _defaultEncoding= Encoding.UTF8;
-        private readonly string _timeFormat = "dd/MM/yyyy - HH:mm";
+        private readonly string _timeFormat = "dd\\/MM\\/yy - HH:mm:ss:fff";
 
         public LogConfiguration()
         {

@@ -24,22 +24,22 @@ namespace Logger
 
         public override async Task Info(string text)
         {
-            await this.WriteToConsole(text, ConsoleColor.Green, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Green, Level.Info);
         }
 
         public override async Task Error(string text)
         {
-            await this.WriteToConsole(text, ConsoleColor.DarkYellow, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.DarkYellow, Level.Error);
         }
 
         public override async Task Critical(string text)
         {
-            await this.WriteToConsole(text, ConsoleColor.Red, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Red, Level.Critical);
         }
 
         public override async Task Fatal(string text)
         {
-            await this.WriteToConsole(text, ConsoleColor.Red, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Red, Level.Fatal);
         }
 
         private async Task WriteToConsole(string text, ConsoleColor color, Level level)
