@@ -4,24 +4,33 @@ using ReflowCore.Exchange;
 using ReflowCore.Services;
 using ReflowModels.EntityModels;
 using System;
+using Logger;
+using Logger.Contract;
 
 namespace ReflowCore.Controllers
 {
     internal class RenamingController : IReflowController
     {
-        private RenamingService service;
-        private IExporter exporter;
+        private readonly RenamingService _service;
+        private readonly IExporter _exporter;
+        private readonly ILog _log;
 
         public RenamingController()
-            :this(new JsonExporter(), new RenamingService())
-        {
-            
+            :this(null, new JsonExporter(), new RenamingService())
+        {  
         }
 
-        public RenamingController(IExporter exporter, RenamingService service)
+        public RenamingController(ILog log)
+           : this(log, new JsonExporter(), new RenamingService())
         {
-            this.exporter = exporter;
-            this.service = service;
+        }
+
+        public RenamingController(ILog log, IExporter exporter, RenamingService service)
+        {
+            this._log = log ?? new ConsoleLogger(); // Until we get DI working and find a way to call ctors from electron.
+            this._exporter = exporter;
+            this._service = service;
+            this._service.Log = _log; // Until we have DI and some Singleton/Factory
         }
 
         public void Initialize()
@@ -31,23 +40,23 @@ namespace ReflowCore.Controllers
 
         public string GetTags()
         {
-            IEnumerable<TagEntityModel> reflowTags = service.GetTags();
-            return exporter.Export(reflowTags);
+            IEnumerable<TagEntityModel> reflowTags = _service.GetTags();
+            return _exporter.Export(reflowTags);
         }
 
         public string GetFilters()
         {
-            var filters = service.GetFilters().ToList();
-            return exporter.Export(filters);
+            var filters = _service.GetFilters().ToList();
+            return _exporter.Export(filters);
         }
 
         public string GetFiles(string directoryPath)
         {
             try
             {
-                var files = service.GetFileNamesByDir(directoryPath);
-                service.FillCache(files);
-                return exporter.Export(files.Values);
+                var files = _service.GetFileNamesByDir(directoryPath);
+                _service.FillCache(files);
+                return _exporter.Export(files.Values);
             }
             catch(Exception e)
             {
@@ -58,17 +67,17 @@ namespace ReflowCore.Controllers
 
         public string GetFileCount()
         {
-            return exporter.Export(service.GetFileCount());
+            return _exporter.Export(_service.GetFileCount());
         }
 
         public string UpdateFiles(string attributesJson)
         {
-            return exporter.Export(service.UpdateFiles(attributesJson));
+            return _exporter.Export(_service.UpdateFiles(attributesJson));
         }
 
         public string RenameFiles()
         {
-            return exporter.Export(service.RenameFiles());
+            return _exporter.Export(_service.RenameFiles());
         }
 
     }

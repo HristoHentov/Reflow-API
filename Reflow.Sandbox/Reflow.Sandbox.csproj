@@ -68,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{33f0c42f-349b-4cfd-a7cf-86f8861be624}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Reflow.Core\Reflow.Core.csproj">
       <Project>{5656a335-4150-4db3-b5c3-ca92e97ce61c}</Project>
       <Name>Reflow.Core</Name>

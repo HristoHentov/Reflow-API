@@ -7,6 +7,8 @@ using ReflowCore.Controllers;
 using ReflowModels.EntityModels;
 using System;
 using System.IO;
+using Logger;
+using Logger.Contract;
 
 namespace ReflowCore.Reflow
 {
@@ -17,21 +19,27 @@ namespace ReflowCore.Reflow
     public class ReflowController
     {
 
-        private ICollection<IReflowController> components;
-        private readonly RenamingController renamingController;
+        private ICollection<IReflowController> _components;
+        private readonly RenamingController _renamingController;
+        private readonly ILog _log;
 
         public ReflowController()
-            : this(new DirectoryStructureController(), new RenamingController())
+            : this(null, new DirectoryStructureController(), new RenamingController())
         {
         }
-        internal ReflowController(params IReflowController[] reflowControllers)
+
+        public ReflowController(ILog log)
+            : this(log, new DirectoryStructureController(log), new RenamingController(log))
+        {
+        }
+        internal ReflowController(ILog log, params IReflowController[] reflowControllers)
         {
             Load(reflowControllers);
-            foreach (var component in components)
+            foreach (var component in _components)
             {
                 component.Initialize();
             }
-            renamingController = (RenamingController)this.components.FirstOrDefault(c => c.GetType() == typeof(RenamingController));
+            _renamingController = (RenamingController)this._components.FirstOrDefault(c => c.GetType() == typeof(RenamingController));
         }
 
         /// <summary>
@@ -40,7 +48,7 @@ namespace ReflowCore.Reflow
         /// <returns>JSON: Name, Options - OptionType, OptionName.</returns>
         public async Task<object> GetTags()
         {
-            return renamingController.GetTags();
+            return _renamingController.GetTags();
         }
         /// <summary>
         /// Returns all filters for selecting files.        
@@ -48,7 +56,7 @@ namespace ReflowCore.Reflow
         /// <returns>JSON: FilterName, FilterOptions </returns>
         public async Task<object> GetFilters()
         {
-            return renamingController.GetFilters();
+            return _renamingController.GetFilters();
         }
 
         /// <summary>
@@ -58,7 +66,7 @@ namespace ReflowCore.Reflow
         /// <returns>JSON: CustomFile (Check ReflowFile class to see fields)</returns>
         public async Task<object> GetFilesInDirectory(object directoryPath)
         {
-            return renamingController.GetFiles(directoryPath.ToString());
+            return _renamingController.GetFiles(directoryPath.ToString());
         }
         public async Task<object> GetDir(object stuff)
         {
@@ -71,7 +79,7 @@ namespace ReflowCore.Reflow
         /// <returns></returns>
         public async Task<object> GetFilesCount(object optional)
         {
-            return renamingController.GetFileCount();
+            return _renamingController.GetFileCount();
         }
         /// <summary>
         /// Updates filenames (UI only), based on a JSON containing the attributes and their options.
@@ -80,7 +88,7 @@ namespace ReflowCore.Reflow
         /// <returns>JSON: Old Filename, NewFilename</returns>
         public string UpdateFiles(string attributesJson)
         {
-            return renamingController.UpdateFiles(attributesJson);
+            return _renamingController.UpdateFiles(attributesJson);
         }
         /// <summary>
         /// Updates filenames (UI only), based on an JSON, containing the options that the attributes use.
@@ -107,7 +115,7 @@ namespace ReflowCore.Reflow
         /// <returns>Return success or error</returns>
         public async Task<object> RenameFiles()
         {
-            return renamingController.RenameFiles();
+            return _renamingController.RenameFiles();
         }
        
         public void AddTag(string name)
@@ -119,10 +127,10 @@ namespace ReflowCore.Reflow
 
         private void Load(params IReflowController[] reflowControllers)
         {
-            this.components = new HashSet<IReflowController>();
+            this._components = new HashSet<IReflowController>();
             foreach (var component in reflowControllers)
             {
-                this.components.Add(component);
+                this._components.Add(component);
             }
         }
 

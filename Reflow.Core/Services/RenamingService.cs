@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Logger.Contract;
 using Reflow.Data;
 using Reflow.Data.Contracts;
 using ReflowCore.Cache;
@@ -15,46 +16,56 @@ namespace ReflowCore.Services
 {
     internal class RenamingService
     {
-        private readonly IUnitOfWork database;
-        private readonly IImporter importer;
+        private readonly IUnitOfWork _database;
+        private readonly IImporter _importer;
 
         public RenamingService()
         {
-            this.database = new UnitOfWork();
-            this.importer = new JsonImporter();
+            this._database = new UnitOfWork();
+            this._importer = new JsonImporter();
         }
+
+        internal ILog Log { get; set; }
+
         internal IDictionary<string, FileViewModel> GetFileNamesByDir(string path)
         {
-            var inFiles = Directory.EnumerateFiles(path);
-            var files = new Dictionary<string, FileViewModel>();
-
-            var index = 0;
-            foreach (var file in inFiles)
+            try
             {
-                var fileName = Utils.GetFullFilename(file);
-                //var fileName = new[] { file, path };
-                files.Add(fileName[0] + "." + fileName[1], new FileViewModel()
-                {
-                    Key = index++,
-                    OriginalName = fileName[0],
-                    NewName = fileName[0],
-                    Type = fileName[1],
-                    Size = GetFileSize(file),
-                    Filtered = false
-                });
-            }
+                var inFiles = Directory.EnumerateFiles(path);
+                var files = new Dictionary<string, FileViewModel>();
 
-            return files;
+                var index = 0;
+                foreach (var file in inFiles)
+                {
+                    var fileName = Utils.GetFullFilename(file);
+                    files.Add(fileName[0] + "." + fileName[1], new FileViewModel()
+                    {
+                        Key = index++,
+                        OriginalName = fileName[0],
+                        NewName = fileName[0],
+                        Type = fileName[1],
+                        Size = GetFileSize(file),
+                        Filtered = false
+                    });
+                }
+
+                return files;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal($"Failed parsing files in {path}. Please check names. Exception message: {ex.Message}");
+                throw;
+            }
         }
 
         internal IEnumerable<TagEntityModel> GetTags()
         {
-            return database.Tags.Entities;
+            return _database.Tags.Entities;
         }
 
         public IEnumerable<Filter> GetFilters()
         {
-            return database.Filters.Entities;
+            return _database.Filters.Entities;
         }
 
         private string GetFileSize(string filePath)
@@ -103,7 +114,7 @@ namespace ReflowCore.Services
         private ICollection<ITag> GetNameBuilderTags(string json)
         {
             var cs = new List<ITag>();
-            cs.Add(importer.Import(json));
+            cs.Add(_importer.Import(json));
             return cs;
         }
 
