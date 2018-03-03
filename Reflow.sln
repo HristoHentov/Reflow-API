@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflow.Data", "Reflow.Data\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflow.Sandbox", "Reflow.Sandbox\Reflow.Sandbox.csproj", "{1465C93E-D173-46ED-AB1C-C0CBB7BF4BF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{33F0C42F-349B-4CFD-A7CF-86F8861BE624}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1465C93E-D173-46ED-AB1C-C0CBB7BF4BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1465C93E-D173-46ED-AB1C-C0CBB7BF4BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1465C93E-D173-46ED-AB1C-C0CBB7BF4BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F0C42F-349B-4CFD-A7CF-86F8861BE624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F0C42F-349B-4CFD-A7CF-86F8861BE624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F0C42F-349B-4CFD-A7CF-86F8861BE624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F0C42F-349B-4CFD-A7CF-86F8861BE624}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
