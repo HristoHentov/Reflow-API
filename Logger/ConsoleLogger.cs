@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Logger.Contract;
 
 namespace Logger
@@ -16,35 +17,35 @@ namespace Logger
             base.OutputStream = Console.OpenStandardOutput();
         }
 
-        public override void Verbose(string text)
+        public override async Task Verbose(string text)
         {
-            this.WriteToConsole(text, ConsoleColor.Gray, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Gray, Level.Verbose);
         }
 
-        public override void Info(string text)
+        public override async Task Info(string text)
         {
-            this.WriteToConsole(text, ConsoleColor.Green, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Green, Level.Verbose);
         }
 
-        public override void Error(string text)
+        public override async Task Error(string text)
         {
-            this.WriteToConsole(text, ConsoleColor.DarkYellow, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.DarkYellow, Level.Verbose);
         }
 
-        public override void Critical(string text)
+        public override async Task Critical(string text)
         {
-            this.WriteToConsole(text, ConsoleColor.Red, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Red, Level.Verbose);
         }
 
-        public override void Fatal(string text)
+        public override async Task Fatal(string text)
         {
-            this.WriteToConsole(text, ConsoleColor.Red, Level.Verbose);
+            await this.WriteToConsole(text, ConsoleColor.Red, Level.Verbose);
         }
 
-        private async void WriteToConsole(string text, ConsoleColor color, Level level)
+        private async Task WriteToConsole(string text, ConsoleColor color, Level level)
         {
             Console.ForegroundColor = color;
-            await base.HandleMessage(text, level);
+            await base.WriteMessage(text, level);
             Console.ForegroundColor = _defaultColor;
         }
     }

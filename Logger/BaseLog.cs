@@ -23,11 +23,11 @@ namespace Logger
             this._timeFormat = config.TimeFormat;
         }
 
-        protected async Task HandleMessage(string message, Level logLevel)
+        protected async Task WriteMessage(string message, Level logLevel)
         {
             if (logLevel >= _logLevel)
             {
-                var taggedMessage = $"[{DateTime.Now.ToString(_timeFormat)}][{logLevel}] {message}{Environment.NewLine}"; ///Todo: reencode time and level text to match message encoding.
+                var taggedMessage = this.StampMessage(message, DateTime.Now, logLevel); //TODO: reencode time and level text to match message encoding.
                 byte[] payload = _encoding.GetBytes(taggedMessage);
 
                 await OutputStream.WriteAsync(payload, _streamOffset, payload.Length);
@@ -36,15 +36,19 @@ namespace Logger
             }
         }
 
+        public abstract Task Verbose(string text);
 
-        public abstract void Verbose(string text);
+        public abstract Task Info(string text);
 
-        public abstract void Info(string text);
+        public abstract Task Error(string text);
 
-        public abstract void Error(string text);
+        public abstract Task Critical(string text);
 
-        public abstract void Critical(string text);
+        public abstract Task Fatal(string text);
 
-        public abstract void Fatal(string text);
+        private string StampMessage(string message, DateTime time, Level level)
+        {
+            return $"[{time.ToString(_timeFormat)}][{level}] {message}{Environment.NewLine}";
+        }
     }
 }

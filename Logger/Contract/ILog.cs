@@ -1,15 +1,17 @@
-﻿namespace Logger.Contract
+﻿using System.Threading.Tasks;
+
+namespace Logger.Contract
 {
     public interface ILog
     {
-        void Verbose(string text);
+        Task Verbose(string text);
 
-        void Info(string text);
+        Task Info(string text);
 
-        void Error(string text);
+        Task Error(string text);
 
-        void Critical(string text);
+        Task Critical(string text);
 
-        void Fatal(string text);
+        Task Fatal(string text);
     }
 }
