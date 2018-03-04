@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Logger.Contract;
 using Reflow.Data;
 using Reflow.Data.Contracts;
 using ReflowCore.Cache;
+using ReflowCore.Constants;
 using ReflowCore.Exchange;
 using ReflowCore.Utility;
 using ReflowModels.EntityModels;
@@ -18,11 +20,23 @@ namespace ReflowCore.Services
     {
         private readonly IUnitOfWork _database;
         private readonly IImporter _importer;
+        private readonly IDictionary<string, Type> _tagTypes;
 
         public RenamingService()
         {
             this._database = new UnitOfWork();
             this._importer = new JsonImporter();
+            this._tagTypes = LoadTagsFromAssembly();
+        }
+
+        private IDictionary<string, Type> LoadTagsFromAssembly()
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var assembly = assemblies.First(a => a.FullName.Split(',')[0] == Consts.ModelsAssemblyName);
+
+            return assembly.ExportedTypes
+                .Where(t => typeof(ITag).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract)
+                .ToDictionary(t => t.Name);
         }
 
         internal ILog Log { get; set; }
@@ -104,25 +118,6 @@ namespace ReflowCore.Services
             return FilesCache.Files.Count;
         }
 
-        public IDictionary<string, string> UpdateFiles(string attributesJson)
-        {
-            Log.Info("Started resolving tags.");
-            NameBuilder nameBuilder = new NameBuilder
-            {
-                Tags = this.GetNameBuilderTags(attributesJson)
-            };
-
-            var res = nameBuilder.Resolve(FilesCache.Files);
-            Log.Info("Resolving tags finished successfully.");
-            return res;
-        }
-
-        private ICollection<ITag> GetNameBuilderTags(string json)
-        {
-            var cs = new List<ITag> {_importer.Import(json)};
-            return cs;
-        }
-
         public string RenameFiles()
         {
             foreach (var file in FilesCache.Files)
@@ -139,7 +134,7 @@ namespace ReflowCore.Services
             {
                 System.IO.File.Move
                            (Path.Combine(FilesCache.WorkingDirectory, oldName, fileType),
-                            Path.Combine(FilesCache.WorkingDirectory, newName, fileType));
+                             Path.Combine(FilesCache.WorkingDirectory, newName, fileType));
             }
             catch (Exception e)
             {
@@ -147,6 +142,25 @@ namespace ReflowCore.Services
                 return false;
             }
             return true;
+        }
+
+        public IDictionary<string, string> UpdateTagsStructureInternal(string tagsJson)
+        {
+            NameBuilder.Instance.Tags = _importer.ParseTagCollection(tagsJson, _tagTypes);
+            return this.UpdateFiles();
+        }
+
+        public IDictionary<string, string> UpdateTagsDataInternal(string json)
+        {
+            var tagInfo = _importer.ParseTag(json, _tagTypes);
+            var idx = NameBuilder.Instance.Tags.IndexOf(tagInfo);
+            NameBuilder.Instance.Tags[idx] = tagInfo;
+            return this.UpdateFiles();
+        }
+
+        private IDictionary<string, string> UpdateFiles()
+        {
+            return NameBuilder.Instance.Resolve(FilesCache.Files);
         }
     }
 }

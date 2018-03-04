@@ -13,8 +13,6 @@ namespace Logger
         private readonly Encoding _encoding;
         private readonly string _timeFormat;
 
-        private int _streamOffset;
-
         public Stream OutputStream { get; protected set; }
 
         protected BaseLog(ILogConfig config)
@@ -32,8 +30,6 @@ namespace Logger
                 byte[] payload = _encoding.GetBytes(taggedMessage);
 
                 await OutputStream.WriteAsync(payload, 0, payload.Length);
-
-                _streamOffset += payload.Length;
             }
         }
 

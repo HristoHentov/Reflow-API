@@ -70,15 +70,19 @@ namespace ReflowCore.Controllers
             return _exporter.Export(_service.GetFileCount());
         }
 
-        public string UpdateFiles(string attributesJson)
-        {
-            return _exporter.Export(_service.UpdateFiles(attributesJson));
-        }
-
         public string RenameFiles()
         {
             return _exporter.Export(_service.RenameFiles());
         }
 
+        public string UpdateTagsStructure(string json)
+        {
+            return _exporter.Export(_service.UpdateTagsStructureInternal(json));
+        }
+
+        public string UpdateTagsData(string json)
+        {
+            return _exporter.Export(_service.UpdateTagsDataInternal(json));
+        }
     }
 }

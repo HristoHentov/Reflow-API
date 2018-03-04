@@ -1,47 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using ReflowModels.ViewModels;
 
 namespace ReflowModels.NamingModels.Tags
 {
-    public class AutoIncrementTag : ITag
+    public sealed class AutoIncrementTag : BaseTag
     {
-        public AutoIncrementTag()
-        {
-            lastValue = StartFrom - Skip; // Adding skip later in the beginning of ToString()
-        }
+        private static int _lastValue;
 
-        public AutoIncrementTag(int startFrom, int skip, bool trailingZero)
+        //public AutoIncrementTag() : this(0,0, false)
+        //{
+        //}
+
+        public AutoIncrementTag(int StartFrom, int skip, bool hasTrailingZero) : base(nameof(AutoIncrementTag))
         {
-            this.StartFrom = startFrom;
+            this.StartFrom = StartFrom;
             this.Skip = skip;
-            this.TrailingZero = trailingZero;
-            lastValue = StartFrom - Skip; // Adding skip later in the beginning of ToString()
 
+            this.HasTrailingZero = hasTrailingZero;  
+            _lastValue = this.StartFrom - Skip; // Adding skip later in the beginning of ToString()
         }
+
+        [JsonConstructor]
+        public AutoIncrementTag(int StartFrom, int Skip, bool HasTrailingZero, int Id, string Name) : base(nameof(AutoIncrementTag))
+        {
+            this.StartFrom = StartFrom;
+            this.Skip = Skip;
+
+            this.HasTrailingZero = HasTrailingZero;
+            _lastValue = this.StartFrom - Skip; // Adding skip later in the beginning of ToString()
+        }
+
+
         public int StartFrom { get; set; }
 
         public int Skip { get; set; }
 
-        public bool TrailingZero { get; set; }
-        private static int lastValue;
+        public bool HasTrailingZero { get; set; }
 
-        public string ToString(string fileName, IDictionary<string, FileViewModel> files)
+
+        public override string ToString(string fileName, IDictionary<string, FileViewModel> files)
         {
-            lastValue += Skip;
-            if (TrailingZero)
-                return lastValue.ToString().PadLeft(GetTrailingZeroes(files), '0');
+            _lastValue += Skip;
 
-            return lastValue.ToString();
+            return HasTrailingZero 
+                ? _lastValue.ToString().PadLeft(GetTrailingZeroes(files), '0') 
+                : _lastValue.ToString();
         }
 
         private int GetTrailingZeroes(IDictionary<string, FileViewModel> files)
         {
             if (files == null)
                 return 0;
+
             var count = files.Values.Count(f => !f.Filtered);
             var result = Math.Max(StartFrom, count * (Skip - 1) + StartFrom); // Not a good formula, but will do for now.
+
             return result.ToString().Length;
         }
     }

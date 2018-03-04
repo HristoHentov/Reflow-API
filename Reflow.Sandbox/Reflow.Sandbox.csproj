@@ -38,6 +38,10 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.104.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -75,6 +79,10 @@
     <ProjectReference Include="..\Reflow.Core\Reflow.Core.csproj">
       <Project>{5656a335-4150-4db3-b5c3-ca92e97ce61c}</Project>
       <Name>Reflow.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reflow.Models\Reflow.Models.csproj">
+      <Project>{197DE1F5-D529-4C46-A152-1B9E22D72AD5}</Project>
+      <Name>Reflow.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

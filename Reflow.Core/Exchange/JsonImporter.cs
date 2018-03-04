@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,25 +10,25 @@ namespace ReflowCore.Exchange
 {
     internal class JsonImporter : IImporter
     {
-        ///TODO: After testing for performance, split into different methods. 
-        ///TODO: This one should only handle the JObject.Parse and be called parse type or something
-        /// 
-        public ITag Import(string json)
+        public ITag ParseTag(string json, IDictionary<string, Type> avaiableTypes)
         {
-            var tagType = JObject.Parse(json).First.First.ToString();
+            var type = JObject.Parse(json)[nameof(ITag.Name)].ToString();
+            return (ITag)JsonConvert.DeserializeObject(json, avaiableTypes[type]);
 
-            var x = JsonConvert.DeserializeObject<AutoIncrementTag>(json);
+        }
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var assembly = assemblies
-                .First(a => a.FullName.Split(',')[0] == Consts.ModelsAssemblyName);
+        public IList<ITag> ParseTagCollection(string json, IDictionary<string, Type> avaiableTypes)
+        {
+            var typesArray = JArray.Parse(json);
+            return typesArray
+                .Select(t => ParseTagEntry(t, avaiableTypes[t[nameof(ITag.Name)].ToString()]))
+                .ToList();
+        }
 
-            Type neededTagType = 
-                assembly
-                .ExportedTypes
-                .FirstOrDefault(t => t.Name == tagType.ToString());
 
-            return (ITag)JsonConvert.DeserializeObject(json, neededTagType);
+        private ITag ParseTagEntry(JToken token, Type type)
+        {
+            return (ITag)JsonConvert.DeserializeObject(token.ToString(), type);
         }
     }
 }

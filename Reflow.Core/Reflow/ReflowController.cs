@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using Logger;
 using Logger.Contract;
+using ReflowModels.Naming;
 
 namespace ReflowCore.Reflow
 {
@@ -34,6 +35,7 @@ namespace ReflowCore.Reflow
         }
         internal ReflowController(ILog log, params IReflowController[] reflowControllers)
         {
+            PokeSingletons();
             Load(reflowControllers);
             foreach (var component in _components)
             {
@@ -41,6 +43,8 @@ namespace ReflowCore.Reflow
             }
             _renamingController = (RenamingController)this._components.FirstOrDefault(c => c.GetType() == typeof(RenamingController));
         }
+
+        
 
         /// <summary>
         /// Returns all tags that the app contains.
@@ -86,15 +90,22 @@ namespace ReflowCore.Reflow
         /// </summary
         /// <param name="attributesJson">An array of KVP, containg the name of the attribute and its parameters</param>
         /// <returns>JSON: Old Filename, NewFilename</returns>
-        public string UpdateFiles(string attributesJson)
-        {
-            return _renamingController.UpdateFiles(attributesJson);
-        }
+
         /// <summary>
         /// Updates filenames (UI only), based on an JSON, containing the options that the attributes use.
         /// </summary>
         /// <param name="newNames">JSON describing the attribute name and its options.</param>
         /// <returns></returns>
+
+        public async Task<object> UpdateTagsStructure(string json)
+        {
+            return _renamingController.UpdateTagsStructure(json);
+        }
+
+        public async Task<object> UpdateTagsData(string json)
+        {
+            return _renamingController.UpdateTagsData(json);
+        }
         public async Task<object> UpdateFileNames(string newNames)
         {
             return null;
@@ -134,6 +145,12 @@ namespace ReflowCore.Reflow
             }
         }
 
+        private static void PokeSingletons()
+        {
+            var a = NameBuilder.Instance.GetType();
+        }
+
+        
     }
 }
 #pragma warning restore 1998

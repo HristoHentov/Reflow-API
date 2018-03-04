@@ -5,13 +5,19 @@ using ReflowModels.ViewModels;
 
 namespace ReflowModels.Naming
 {
-    public class NameBuilder
+    public sealed class NameBuilder
     {
-        public NameBuilder()
+        private static readonly Lazy<NameBuilder> _singletonInstance = new Lazy<NameBuilder>(() => new NameBuilder());
+
+        public static NameBuilder  Instance => _singletonInstance.Value;
+
+
+        private NameBuilder()
         {
-            this.Tags = new List<ITag>();
+            Tags = new List<ITag>();
         }
-        public ICollection<ITag> Tags { get; set; }
+
+        public IList<ITag> Tags { get; set; }
 
         public IDictionary<string, string> Resolve(IDictionary<string, FileViewModel> files)
         {
@@ -20,7 +26,7 @@ namespace ReflowModels.Naming
             {
                 string newName = string.Empty;
                 foreach (var tag in Tags)
-                  newName += (tag.ToString(file.Key, files));
+                    newName += (tag.ToString(file.Key, files));
 
                 newNames.Add(file.Key, newName);
             }
