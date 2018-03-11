@@ -10,10 +10,11 @@ namespace ReflowModels.NamingModels.Tags
     {
         private static int _lastValue;
 
-        //public AutoIncrementTag() : this(0,0, false)
-        //{
-        //}
+        public AutoIncrementTag() : this(0,0, false)
+        {
+        }
 
+        [JsonConstructor]
         public AutoIncrementTag(int StartFrom, int skip, bool hasTrailingZero) : base(nameof(AutoIncrementTag))
         {
             this.StartFrom = StartFrom;
@@ -23,23 +24,11 @@ namespace ReflowModels.NamingModels.Tags
             _lastValue = this.StartFrom - Skip; // Adding skip later in the beginning of ToString()
         }
 
-        [JsonConstructor]
-        public AutoIncrementTag(int StartFrom, int Skip, bool HasTrailingZero, int Id, string Name) : base(nameof(AutoIncrementTag))
-        {
-            this.StartFrom = StartFrom;
-            this.Skip = Skip;
-
-            this.HasTrailingZero = HasTrailingZero;
-            _lastValue = this.StartFrom - Skip; // Adding skip later in the beginning of ToString()
-        }
-
-
         public int StartFrom { get; set; }
 
         public int Skip { get; set; }
 
         public bool HasTrailingZero { get; set; }
-
 
         public override string ToString(string fileName, IDictionary<string, FileViewModel> files)
         {
